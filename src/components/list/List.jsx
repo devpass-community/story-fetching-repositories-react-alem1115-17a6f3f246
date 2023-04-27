@@ -7,7 +7,7 @@ const List = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchRepositories = async () => {
-    // TODO
+    const response = await fetch('https://api.github.com/users/devpass-tech/repos')
   };
 
   return (
