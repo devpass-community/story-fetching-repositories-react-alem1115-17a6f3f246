@@ -1,8 +1,5 @@
 {
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "airbnb"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -12,7 +9,6 @@
         }
     },
     "plugins": [
-        "react"
     ],
     "rules": {
         "react/prop-types": 0,
