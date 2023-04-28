@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ListGroup, Button, Spinner } from "react-bootstrap";
+import { ListGroup, Button, Spinner, ListGroupItem } from "react-bootstrap";
 import "./styles.css";
 
 const List = () => {
@@ -7,7 +7,11 @@ const List = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchRepositories = async () => {
-    // TODO
+    setIsLoading(true);
+    const res = await fetch("https://api.github.com/users/devpass-tech/repos");
+    const data = await res.json();
+    setRepositories(data);
+    setIsLoading(false);
   };
 
   return (
@@ -15,15 +19,18 @@ const List = () => {
       <div className="container">
         <h2 className="title">Devpass Repositories</h2>
 
-        { isLoading ?
-        ( <Spinner/> ) : 
-        ( 
+        {isLoading ? (
+          <Spinner />
+        ) : (
           <ListGroup className="repositoriesList">
-
-          { /* TODO */ }
-          
-          </ListGroup> )}
-      <Button data-testid="button" className="button" variant="primary" onClick={() => fetchRepositories()}>Fetch repositories</Button>
+            {repositories.map((repository) => (
+              <ListGroupItem key={repository.id}>{repository.name}</ListGroupItem>
+            ))}
+          </ListGroup>
+        )}
+        <Button data-testid="button" className="button" variant="primary" onClick={() => fetchRepositories()}>
+          Fetch repositories
+        </Button>
       </div>
     </div>
   );
